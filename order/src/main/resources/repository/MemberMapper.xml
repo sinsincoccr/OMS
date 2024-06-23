@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="projectOMS.order.repository.MemberMapper">
+
+    <!-- 회원 가입 처리 -->
+    <insert id="memberSignIn" parameterType="MemberVO">
+        INSERT INTO OMS_COMPANY_MEMBER (
+        CPN_CD, CPN_BIZ_NO, CPN_ID, CPN_PW, CPN_NM, CEO_NM, CPN_ADDR,
+        CPN_IMAGE_URL, CPN_DESC, OPN_DT, CPN_TEL, CPN_EMAIL, CPN_STATE,
+        STATE_MDF_DATE, REG_DATE
+        )
+        VALUES (
+        cpn_cd_seq.nextval,
+        #{cpn_biz_no, jdbcType=VARCHAR},
+        #{cpn_id, jdbcType=VARCHAR},
+        #{cpn_pw, jdbcType=VARCHAR},
+        #{cpn_nm, jdbcType=VARCHAR},
+        #{ceo_nm, jdbcType=VARCHAR},
+        #{cpn_addr, jdbcType=VARCHAR},
+        #{cpn_image_url, jdbcType=VARCHAR},
+        #{cpn_desc, jdbcType=VARCHAR},
+        #{opn_dt, jdbcType=VARCHAR},
+        #{cpn_tel, jdbcType=VARCHAR},
+        #{cpn_email, jdbcType=VARCHAR},
+        #{cpn_state, jdbcType=VARCHAR},
+        sysdate,
+        sysdate
+        )
+    </insert>
+
+
+
+    <select id="idCheck" parameterType="String" resultType="int">
+        SELECT COUNT(cpn_id) FROM OMS_COMPANY_MEMBER WHERE CPN_ID= #{cpn_id}
+    </select>
+
+
+
+
+    <select id="findById" resultType="MemberVO">
+        select * from userTable where user_id=#{user_id}
+    </select>
+
+    <!--  유저 한개 조회  -->
+    <select id="findByPw" resultType="MemberVO">
+        select * from userTable where user_no=#{user_no}
+    </select>
+
+    <select id="findAll" parameterType="String" resultType="int">
+        SELECT COUNT(user_id) FROM userTable WHERE user_id= #{user_id}
+    </select>
+
+
+
+</mapper>

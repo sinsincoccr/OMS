@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Member Sign In</title>
+
+    <style>
+        .id_ok{
+            color:#008000;
+            display: none;
+        }
+        .id_already{
+            color:#6A82FB;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/memberSignIn}" th:object="${member}" method="post">
+    <div class="container">
+        <div class="mb-3">
+            <label for="id">아이디</label>
+            <input th:field="*{cpn_id}" id="id" name="cpn_id" oninput="checkId()">
+        </div>
+            <!-- id ajax 중복체크 -->
+            <span class="id_ok">사용 가능한 아이디입니다.</span>
+            <span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
+        </div>
+
+        <div class="mb-3">
+        <label for="pwInput" class="form-label">비밀번호</label>
+        <input th:field="*{cpn_pw}" class="form-control" id="pwInput" />
+        </div>
+
+    </div>
+
+    <div class="mb-3">
+        <label for="cpnNmInput" class="form-label">회사명</label>
+        <input th:field="*{cpn_nm}" class="form-control" id="cpnNmInput" />
+    </div>
+
+    <div class="mb-3">
+        <label for="ceoNmInput" class="form-label">대표명</label>
+        <input th:field="*{ceo_nm}" class="form-control" id="ceoNmInput" />
+    </div>
+
+    <div class="mb-3">
+        <label for="cpnBizNoInput" class="form-label">사업자번호</label>
+        <input th:field="*{cpn_biz_no}" class="form-control" id="cpnBizNoInput" />
+    </div>
+
+    <div class="mb-3">
+        <label for="cpnAddrInput" class="form-label">회사주소명</label>
+        <input th:field="*{cpn_addr}" class="form-control" id="cpnAddrInput" />
+    </div>
+
+    <div class="mb-3">
+        <label for="cpnDescInput" class="form-label">업체설명</label>
+        <input th:field="*{cpn_desc}" class="form-control" id="cpnDescInput" />
+    </div>
+
+    <div class="mb-3">
+        <label for="cpnTelInput" class="form-label">전화번호</label>
+        <input th:field="*{cpn_tel}" class="form-control" id="cpnTelInput" />
+    </div>
+
+    <div class="mb-3">
+        <label for="emailInput" class="form-label">이메일</label>
+        <input th:field="*{cpn_email}" class="form-control" id="emailInput" />
+    </div>
+
+
+
+
+    </div>
+        <button type="submit" class="btn btn-primary">저장</button>
+        <button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/}'|">취소</button>
+    </div>
+
+</form>
+
+
+<script type="text/javascript">
+
+
+    function checkId(){
+        var id = $('#id').val(); //id값이 "id"인 입력란의 값을 저장
+        $.ajax({
+            url:'/idCheck', //Controller에서 요청 받을 주소
+            type:'post', //POST 방식으로 전달
+            data:{id:id},
+            success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다
+                if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디
+                    $('.id_ok').css("display","inline-block");
+                    $('.id_already').css("display", "none");
+                } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+                    $('.id_already').css("display","inline-block");
+                    $('.id_ok').css("display", "none");
+                    alert("이미 사용중인 아이디 입니다.");
+                    $('#id').val('');
+                }
+            },
+            error:function(){
+                alert("에러입니다");
+            }
+        });
+        };
+
+</script>
+
+</body>
+</html>
