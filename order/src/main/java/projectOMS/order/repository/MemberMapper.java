@@ -13,7 +13,7 @@ public interface MemberMapper {
 
     public int idCheck(String id);
 
-    Optional<MemberVO> findById(String id);
+    MemberVO findById(String cpn_id);
 
     Optional<MemberVO> findByPw(String pw);
 

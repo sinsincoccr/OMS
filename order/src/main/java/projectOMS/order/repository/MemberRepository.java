@@ -7,6 +7,8 @@ public interface MemberRepository {
     // 회원 가입
     MemberVO memberSignIn(MemberVO member);
 
+    MemberVO findById(String cpn_id);
+
 
 }
 

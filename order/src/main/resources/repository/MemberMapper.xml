@@ -41,12 +41,12 @@
 
 
     <select id="findById" resultType="MemberVO">
-        select * from userTable where user_id=#{user_id}
+        select * from OMS_COMPANY_MEMBER where cpn_id=#{cpn_id}
     </select>
 
     <!--  유저 한개 조회  -->
     <select id="findByPw" resultType="MemberVO">
-        select * from userTable where user_no=#{user_no}
+        select * from OMS_COMPANY_MEMBER where cpn_no=#{cpn_no}
     </select>
 
     <select id="findAll" parameterType="String" resultType="int">

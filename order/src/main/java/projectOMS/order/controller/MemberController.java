@@ -35,6 +35,10 @@ public class MemberController {
         int cnt = memberService.idCheck(id);
         return cnt;
     }
+    //로그인
+
+
+
 
 
 
