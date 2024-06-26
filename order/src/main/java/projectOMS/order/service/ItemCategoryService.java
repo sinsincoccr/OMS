@@ -11,6 +11,6 @@ public interface ItemCategoryService {
 
     List<ItemCategoryVO> getItemCategory();
 
-    void updateView(String ctgr_cd);
+
 
 }

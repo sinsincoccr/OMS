@@ -12,7 +12,7 @@ public interface ItemCategoryMapper {
 
     List<ItemCategoryVO> getItemCategory();
 
-    void updateView(String ctgr_cd);
+
 
 
 

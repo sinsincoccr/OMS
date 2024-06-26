@@ -12,22 +12,22 @@ import java.util.List;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class ItemCategoryServiceImpl implements ItemCategoryService {
 
 
     private final ItemCategoryMapper itemCategoryMapper;
 
+    public ItemCategoryServiceImpl(ItemCategoryMapper itemCategoryMapper) {
+        this.itemCategoryMapper = itemCategoryMapper;
+    }
+
     @Override
     public List<ItemCategoryVO> getItemCategory() {
-        return itemCategoryMapper.getItemCategory();
+        List<ItemCategoryVO> itemCategory = itemCategoryMapper.getItemCategory();
+        return itemCategory;
     }
 
 
-    @Override
-    public void updateView(String ctgr_cd) {
-        itemCategoryMapper.updateView(ctgr_cd);
-    }
 
 
 

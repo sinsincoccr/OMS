@@ -6,12 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import projectOMS.order.domain.ItemCategoryVO;
-import projectOMS.order.domain.MemberVO;
-import projectOMS.order.dto.Criteria;
-import projectOMS.order.dto.PagingDTO;
 import projectOMS.order.service.ItemCategoryService;
 
-import javax.servlet.http.HttpSession;
+
 import java.util.List;
 
 @Slf4j

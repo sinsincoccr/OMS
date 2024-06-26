@@ -24,8 +24,8 @@ public class MemberRepositoryImpl implements MemberRepository{
 
 
     @Override
-    public MemberVO findById(String user_id) {
-        return memberMapper.findById(user_id);
+    public MemberVO findById(String cpn_id) {
+        return memberMapper.findById(cpn_id);
     }
 
 
