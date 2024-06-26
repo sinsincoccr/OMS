@@ -44,14 +44,12 @@
         select * from OMS_COMPANY_MEMBER where cpn_id=#{cpn_id}
     </select>
 
-    <!--  유저 한개 조회  -->
+    <!--  유저 비밀번호 조회  -->
     <select id="findByPw" resultType="MemberVO">
         select * from OMS_COMPANY_MEMBER where cpn_no=#{cpn_no}
     </select>
 
-    <select id="findAll" parameterType="String" resultType="int">
-        SELECT COUNT(user_id) FROM userTable WHERE user_id= #{user_id}
-    </select>
+
 
 
 

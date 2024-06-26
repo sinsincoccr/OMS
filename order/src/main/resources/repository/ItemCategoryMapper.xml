@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="projectOMS.order.repository.ItemCategoryMapper">
+
+    <!-- 카테고리 호출 -->
+    <select id="getItemCategory" resultType="ItemCategoryVO">
+        select * from OMS_ITEM_CATEGORY
+    </select>
+
+
+</mapper>
