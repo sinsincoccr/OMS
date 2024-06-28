@@ -10,5 +10,9 @@
         select * from OMS_ITEM_CATEGORY
     </select>
 
+    <select id="getItemListOne" resultType="ItemListVO">
+        select * from OMS_ITEM_LIST where ctgr_cd = #{ctgr_cd}
+    </select>
+
 
 </mapper>

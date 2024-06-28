@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import projectOMS.order.domain.ItemCategoryVO;
+import projectOMS.order.domain.ItemListVO;
 import projectOMS.order.domain.MemberVO;
 import projectOMS.order.repository.ItemCategoryMapper;
 
@@ -27,13 +28,11 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
         return itemCategory;
     }
 
-
-
-
-
-
-
-
+    @Override
+    public List<ItemListVO> getItemListOne(String ctgr_cd) {
+        List<ItemListVO> getItemListOne = itemCategoryMapper.getItemListOne(ctgr_cd);
+        return getItemListOne;
+    }
 
 
 }

@@ -1,4 +1,4 @@
--- ȸ�� ���
+-- ȸ�� ���?
 
 CREATE TABLE OMS_COMPANY_MEMBER (
     CPN_CD VARCHAR(30) PRIMARY KEY NOT NULL,
@@ -28,15 +28,21 @@ CREATE SEQUENCE cpn_cd_seq
     INCREMENT BY 1
     NOMAXVALUE;
     
-    -- ������ ī�װ� (2�� ����ȭ ����)
+    
     CREATE TABLE OMS_ITEM_CATEGORY (
     CTGR_CD VARCHAR(20) PRIMARY KEY,  
+    CPN_NM VARCHAR(20),  
     SEQ INT,                          
     REG_USER_CD VARCHAR(20),          
     REG_DATE DATE,                    
     MDF_USER_CD VARCHAR(20),         
     MDF_DATE DATE                     
 );
+
+drop table OMS_ITEM_CATEGORY;
+
+select * from OMS_ITEM_CATEGORY;
+commit;
 
 CREATE TABLE OMS_ITEM_LIST (
     CH_CD VARCHAR(5) PRIMARY KEY NOT NULL,

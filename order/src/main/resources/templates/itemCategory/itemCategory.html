@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +9,7 @@
 
 </head>
 <body>
-<th:block th:insert="~{assist/sidebar :: contents}"/>
+<!-- <th:block th:insert="~{assist/sidebar :: contents}"/> -->
 
 <table>
     <tr>
@@ -28,6 +29,9 @@
         <td th:text="${itemCategory.mdf_date}"></td>
     </tr>
 </table>
+
+<button type="button" class="btn btn-secondary" th:onclick="|window.open('@{/categorySearch}', '_blank', 'width=900,height=800')|">검색</button>
+
 
 
 
