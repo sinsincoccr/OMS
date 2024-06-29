@@ -23,8 +23,8 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
     }
 
     @Override
-    public List<ItemCategoryVO> getItemCategory() {
-        List<ItemCategoryVO> itemCategory = itemCategoryMapper.getItemCategory();
+    public List<ItemCategoryVO> getItemCategory(String cpn_nm) {
+        List<ItemCategoryVO> itemCategory = itemCategoryMapper.getItemCategory(cpn_nm);
         return itemCategory;
     }
 

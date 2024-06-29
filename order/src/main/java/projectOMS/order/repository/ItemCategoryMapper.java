@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface ItemCategoryMapper {
 
-    List<ItemCategoryVO> getItemCategory();
+    List<ItemCategoryVO> getItemCategory(String cpn_nm);
 
     List<ItemListVO> getItemListOne(String ctgr_cd);
 

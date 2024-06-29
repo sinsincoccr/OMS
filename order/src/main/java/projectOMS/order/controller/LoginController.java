@@ -52,7 +52,7 @@ public class LoginController {
         log.info("loginMember {}", loginMember);
         if(loginMember != null) {
             session.setAttribute("loginMember", loginMember);
-            return "redirect:/itemCategory"; // 로그인 후 홈으로 이동
+            return "redirect:/categorySearch"; // 로그인 후 홈으로 이동
         } else {  // 알럿창 띄우기 추가
             model.addAttribute("loginFail", true);
             // 로그인 실패 시 알림 창 띄우기 위해 Flash Attributes 사용

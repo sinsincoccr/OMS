@@ -5,12 +5,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import projectOMS.order.domain.ItemCategoryVO;
 import projectOMS.order.domain.ItemListVO;
 import projectOMS.order.domain.MemberVO;
 import projectOMS.order.service.ItemCategoryService;
-
 
 import java.util.List;
 
@@ -18,24 +20,25 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/")
-public class ItemCategoryController {
+public class ItemListController {
 
     private final ItemCategoryService itemCategoryService;
 
-    @GetMapping("/categorySearch")
-    public String categorySearch(Model model, HttpSession session){
+
+
+    @GetMapping("/itemSearch")
+    public String itemSearch(Model model, HttpSession session) {
         MemberVO member = (MemberVO) session.getAttribute("loginMember");
-        List<ItemCategoryVO> itemCategory = itemCategoryService.getItemCategory(String.valueOf(member.getCpn_nm()));
-        log.info("****member {}", member);
-        model.addAttribute("itemCategory", itemCategory);
-        log.info("****itemCategory {}", itemCategory);
-        return "itemCategory/categorySearch";
+        List<ItemCategoryVO> categorySearch = itemCategoryService.getItemCategory(String.valueOf(member.getCpn_nm()));
+        model.addAttribute("categorySearch", categorySearch);
+        log.info("****categorySearch {}", categorySearch);
+        return "item/itemSearch";
     }
 
-    @GetMapping("/categoryAdd")
-    public String categoryAdd(Model model, HttpSession session){
-        model.addAttribute("itemList", new ItemListVO());
-        return "item/itemCategoryAdd";
+    @GetMapping("/getItemListOne")
+    @ResponseBody
+    public List<ItemListVO> getItemListOne(@RequestParam("ctgr_cd") String ctgrCd) {
+        return itemCategoryService.getItemListOne(ctgrCd);
     }
 
 

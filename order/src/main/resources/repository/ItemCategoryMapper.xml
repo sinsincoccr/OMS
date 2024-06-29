@@ -7,7 +7,7 @@
 
     <!-- 카테고리 호출 -->
     <select id="getItemCategory" resultType="ItemCategoryVO">
-        select * from OMS_ITEM_CATEGORY
+        select * from OMS_ITEM_CATEGORY where CPN_NM = #{cpn_nm}
     </select>
 
     <select id="getItemListOne" resultType="ItemListVO">

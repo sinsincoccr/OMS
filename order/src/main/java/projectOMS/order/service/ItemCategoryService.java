@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ItemCategoryService {
 
-    List<ItemCategoryVO> getItemCategory();
+    List<ItemCategoryVO> getItemCategory(String cpn_nm);
 
     List<ItemListVO> getItemListOne(String ctgr_cd);
 
