@@ -14,5 +14,19 @@
         select * from OMS_ITEM_LIST where ctgr_cd = #{ctgr_cd}
     </select>
 
+    <insert id="itemCategoryAdd" parameterType="map">
+        INSERT INTO OMS_ITEM_CATEGORY (
+        CTGR_CD, CPN_NM, SEQ, REG_USER_CD, REG_DATE
+        )
+        VALUES (
+        #{itemCategory.ctgr_cd, jdbcType=VARCHAR},
+        #{itemCategory.cpn_nm, jdbcType=VARCHAR},
+        #{itemCategory.seq, jdbcType=INTEGER},
+        #{member.cpn_id, jdbcType=VARCHAR},
+        sysdate
+        )
+    </insert>
+
+
 
 </mapper>

@@ -34,5 +34,10 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
         return getItemListOne;
     }
 
+    @Override
+    public void itemCategoryAdd(ItemCategoryVO itemCategory, MemberVO member) {
+        itemCategoryMapper.itemCategoryAdd(itemCategory, member);
+    }
+
 
 }

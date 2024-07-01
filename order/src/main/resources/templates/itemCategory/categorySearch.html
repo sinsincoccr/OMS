@@ -33,8 +33,14 @@
     </tr>
 </table>
 
-<button type="button" class="btn btn-secondary" th:onclick="|window.open('@{/itemSearch}', '_blank', 'width=900,height=800')|">검색</button>
-<button type="button" class="btn btn-secondary" th:onclick="|window.open('@{/categoryAdd}', '_blank', 'width=900,height=800')|">등록</button>
+
+<button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/itemSearch}'|">검색</button>
+<button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/categoryAdd}'|">등록</button>
+
+
+
+
+
 
 
 </div>

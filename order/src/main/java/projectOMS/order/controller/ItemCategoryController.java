@@ -34,8 +34,16 @@ public class ItemCategoryController {
 
     @GetMapping("/categoryAdd")
     public String categoryAdd(Model model, HttpSession session){
-        model.addAttribute("itemList", new ItemListVO());
+        MemberVO member = (MemberVO) session.getAttribute("loginMember");
+        model.addAttribute("itemCategoryList", new ItemCategoryVO());
         return "item/itemCategoryAdd";
+    }
+
+    @PostMapping("/categoryAdd")
+    public String categoryAddPro(@ModelAttribute ItemCategoryVO itemCategory, HttpSession session) {
+        MemberVO member = (MemberVO) session.getAttribute("loginMember");
+        itemCategoryService.itemCategoryAdd(itemCategory, member);
+        return "itemCategory/categorySearch";
     }
 
 

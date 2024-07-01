@@ -14,6 +14,8 @@ public interface ItemCategoryService {
 
     List<ItemListVO> getItemListOne(String ctgr_cd);
 
+    void itemCategoryAdd(ItemCategoryVO itemCategory, MemberVO member);
+
 
 
 }
