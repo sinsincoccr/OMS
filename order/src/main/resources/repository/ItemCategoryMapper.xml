@@ -27,6 +27,10 @@
         )
     </insert>
 
+    <delete id="deleteItemCategory" parameterType="String">
+        DELETE FROM OMS_ITEM_CATEGORY WHERE CTGR_CD = #{ctgrCd}
+    </delete>
+
 
 
 </mapper>

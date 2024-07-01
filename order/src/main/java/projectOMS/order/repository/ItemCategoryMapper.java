@@ -18,6 +18,8 @@ public interface ItemCategoryMapper {
 
     void itemCategoryAdd(ItemCategoryVO itemCategory, MemberVO member);
 
+    void deleteItemCategory(String ctgr_cd);
+
 
 
 

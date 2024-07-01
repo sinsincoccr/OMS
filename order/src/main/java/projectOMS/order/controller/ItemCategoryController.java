@@ -3,6 +3,7 @@ package projectOMS.order.controller;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +45,12 @@ public class ItemCategoryController {
         MemberVO member = (MemberVO) session.getAttribute("loginMember");
         itemCategoryService.itemCategoryAdd(itemCategory, member);
         return "itemCategory/categorySearch";
+    }
+
+    @DeleteMapping("/categoryDelete/{ctgrCd}")
+    public ResponseEntity<Void> categoryDelete(@PathVariable("ctgrCd") String ctgr_cd) {
+        itemCategoryService.deleteItemCategory(ctgr_cd);
+        return ResponseEntity.ok().build();
     }
 
 

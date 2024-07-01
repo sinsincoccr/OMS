@@ -39,5 +39,10 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
         itemCategoryMapper.itemCategoryAdd(itemCategory, member);
     }
 
+    @Override
+    public void deleteItemCategory(String ctgr_cd) {
+        itemCategoryMapper.deleteItemCategory(ctgr_cd);
+    }
+
 
 }
