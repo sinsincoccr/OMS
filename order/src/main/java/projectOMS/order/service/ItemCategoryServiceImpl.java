@@ -10,6 +10,7 @@ import projectOMS.order.domain.MemberVO;
 import projectOMS.order.repository.ItemCategoryMapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -29,6 +30,11 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
     }
 
     @Override
+    public ItemCategoryVO getItemCategoryByctgrCd(String ctgr_cd) {
+        return itemCategoryMapper.getItemCategoryByctgrCd(ctgr_cd);
+    }
+
+    @Override
     public List<ItemListVO> getItemListOne(String ctgr_cd) {
         List<ItemListVO> getItemListOne = itemCategoryMapper.getItemListOne(ctgr_cd);
         return getItemListOne;
@@ -37,6 +43,12 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
     @Override
     public void itemCategoryAdd(ItemCategoryVO itemCategory, MemberVO member) {
         itemCategoryMapper.itemCategoryAdd(itemCategory, member);
+    }
+
+    @Override
+    public void itemCategoryUpdate(Map<String, Object> Map) {
+        itemCategoryMapper.itemCategoryUpdate(Map);
+
     }
 
     @Override

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Category Management</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+</head>
+<body>
+<th:block th:insert="~{assist/sidebar :: contents}"/>
+<div style="margin-left:200px; padding:20px;">
+    <form th:action="@{/categoryUpdate}" th:object="${itemCategory}" method="post">
+        <div class="container">
+            <div class="mb-3">
+                <label for="ctgrCdInput">카테고리 코드</label>
+                <input th:field="*{ctgr_cd}" id="ctgrCdInput" class="form-control" th:value="*{ctgr_cd}" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="cpnNmInput" class="form-label">회사명</label>
+                <input th:field="*{cpn_nm}" id="cpnNmInput" class="form-control" th:value="*{cpn_nm}" />
+            </div>
+            <div class="mb-3">
+                <label for="seqInput" class="form-label">정렬 순서</label>
+                <input th:field="*{seq}" id="seqInput" class="form-control" th:value="*{seq}" />
+            </div>
+            <button type="submit" class="btn btn-primary">저장</button>
+            <button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/}'|">취소</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

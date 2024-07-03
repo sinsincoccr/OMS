@@ -7,7 +7,11 @@
 
     <!-- 카테고리 호출 -->
     <select id="getItemCategory" resultType="ItemCategoryVO">
-        select * from OMS_ITEM_CATEGORY where CPN_NM = #{cpn_nm}
+        select * from OMS_ITEM_CATEGORY where CPN_NM = #{cpn_nm} ORDER BY seq
+    </select>
+
+    <select id="getItemCategoryByctgrCd" resultType="ItemCategoryVO">
+        select * from OMS_ITEM_CATEGORY where ctgr_cd = #{ctgr_cd}
     </select>
 
     <select id="getItemListOne" resultType="ItemListVO">
@@ -30,6 +34,31 @@
     <delete id="deleteItemCategory" parameterType="String">
         DELETE FROM OMS_ITEM_CATEGORY WHERE CTGR_CD = #{ctgrCd}
     </delete>
+
+    <update id="itemCategoryUpdate" parameterType="map">
+        UPDATE OMS_ITEM_CATEGORY
+        SET
+        CPN_NM = #{itemCategory.cpn_nm, jdbcType=VARCHAR},
+        SEQ = #{itemCategory.seq, jdbcType=INTEGER},
+        MDF_USER_CD = #{cpn_id, jdbcType=VARCHAR},
+        MDF_DATE = sysdate
+        WHERE
+        CTGR_CD = #{itemCategory.ctgr_cd, jdbcType=VARCHAR}
+    </update>
+
+
+    <!--
+        <update id="itemCategoryUpdate" parameterType="ItemCategoryVO">
+            UPDATE OMS_ITEM_CATEGORY
+            SET
+            CPN_NM = #{cpn_nm, jdbcType=VARCHAR},
+            SEQ = #{seq, jdbcType=INTEGER},
+            MDF_USER_CD = #{member.CPN_ID, jdbcType=VARCHAR},
+            MDF_DATE= sysdate
+            WHERE
+            CTGR_CD = #{ctgr_cd, jdbcType=VARCHAR}
+        </update> -->
+
 
 
 

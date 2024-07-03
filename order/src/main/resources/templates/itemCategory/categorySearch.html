@@ -12,16 +12,18 @@
 <div style="margin-left:200px; padding:20px;">
     <header>
         <div id="header_title">품목관리<b class="greater">&gt;</b>카테고리 리스트 조회</div>
+        <button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/itemSearch}'|">검색</button>
+        <button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/categoryAdd}'|">등록</button>
     </header>
-    <table>
+    <table border="1">
         <thead>
         <tr>
-            <th>CTGR_CD</th>
-            <th>SEQ</th>
-            <th>REG_USER_CD</th>
-            <th>REG_DATE</th>
-            <th>MDF_USER_CD</th>
-            <th>MDF_DATE</th>
+            <th>카테고리</th>
+            <th>정렬</th>
+            <th>등록자</th>
+            <th>등록일시</th>
+            <th>수정자</th>
+            <th>수정일시</th>
             <th>수정</th>
             <th>삭제</th>
         </tr>
@@ -35,7 +37,7 @@
             <td th:text="${itemCategory.mdf_user_cd}"></td>
             <td th:text="${itemCategory.mdf_date}"></td>
             <td>
-                <button type="button" th:data-ctgr_cd="${itemCategory.ctgr_cd}" onclick="updateItemCategory(this)">수정</button>
+                <button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/categoryUpdate(ctgrCd=${itemCategory.ctgr_cd})}'|">수정</button>
             </td>
             <td>
                 <button type="button" th:data-ctgr_cd="${itemCategory.ctgr_cd}" onclick="deleteItemCategory(this)">삭제</button>
@@ -44,8 +46,7 @@
         </tbody>
     </table>
 
-    <button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/itemSearch}'|">검색</button>
-    <button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/categoryAdd}'|">등록</button>
+
 
     <script>
         function deleteItemCategory(button) {
@@ -65,11 +66,7 @@
             }
         }
 
-        function updateItemCategory(button) {
-            const ctgrCd = button.getAttribute('data-ctgr_cd');
-            // 수정 로직 추가 필요
-            alert('수정 기능을 구현하세요. CTGR_CD: ' + ctgrCd);
-        }
+
     </script>
 </div>
 </body>

@@ -36,43 +36,37 @@
     </header>
     <section class='div_header'>
         <div class='search_div'>
-            <p id='snm_p'>카테고리 리스트</p>
             <div class="search_form" id="snm_form">
                 <select class='search_box' id='snm' name='snm'>
                     <option value="" disabled selected>카테고리를 선택하세요</option>
-                    <option th:each="categorySearch : ${categorySearch}"
-                            th:value="${categorySearch.ctgr_cd}"
-                            th:text="${categorySearch.ctgr_cd + ' - ' + categorySearch.reg_user_cd}">
+                    <option th:each="category : ${categorySearch}"
+                            th:value="${category.ctgr_cd}"
+                            th:text="${category.ctgr_cd + ' - ' + category.reg_user_cd}">
                     </option>
                 </select>
                 <button type="button" class='btn_search'>조회</button>
+                <button type="button" class="btn btn-secondary" onclick="registerItem()">등록</button>
             </div>
             <input type='text' id='scd' name='scd' hidden value="UserLevelBasedValue" />
-        </div>
-        <div class="refresh">
-            <button type="button" class='btn_refresh' title="검색 초기화">초기화</button>
-        </div>
-        <div class="btn_div">
-            <button type="button" class='btn_reg_category_lv1'>등록</button>
         </div>
     </section>
     <div class='main_div'>
         <table id="itemTable" border="1">
             <thead>
             <tr>
-                <th>CTGR_CD</th>
-                <th>PRODUCT_CD</th>
-                <th>PRODUCT_NM</th>
-                <th>SEQ</th>
-                <th>NORMAL_AMOUNT</th>
-                <th>DISCOUNT_AMOUNT</th>
-                <th>RANKING</th>
-                <th>PRODUCT_STATE</th>
-                <th>PRODUCT_GUIDE</th>
-                <th>REG_USER_CD</th>
-                <th>REG_DATE</th>
-                <th>MDF_USER_CD</th>
-                <th>MDF_DATE</th>
+                <th>카테고리</th>
+                <th>제품넘버</th>
+                <th>제품명</th>
+                <th>정렬</th>
+                <th>판매금액</th>
+                <th>할인금액</th>
+                <th>판매량</th>
+                <th>등록현황</th>
+                <th>제품설명</th>
+                <th>등록자</th>
+                <th>등록일</th>
+                <th>수정자</th>
+                <th>수정일시</th>
             </tr>
             </thead>
             <tbody>
@@ -129,5 +123,19 @@
         });
     });
 </script>
+
+
+<script>
+    function registerItem() {
+        const selectedCategory = document.getElementById('snm').value;
+        if (selectedCategory) {
+            location.href = `/itemAdd?ctgrCd=${selectedCategory}`;
+        } else {
+            alert('카테고리를 선택하세요');
+        }
+    }
+</script>
+
+
 </body>
 </html>

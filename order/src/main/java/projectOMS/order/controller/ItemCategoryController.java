@@ -8,12 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import projectOMS.order.domain.ItemCategoryVO;
-import projectOMS.order.domain.ItemListVO;
 import projectOMS.order.domain.MemberVO;
 import projectOMS.order.service.ItemCategoryService;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -37,7 +38,7 @@ public class ItemCategoryController {
     public String categoryAdd(Model model, HttpSession session){
         MemberVO member = (MemberVO) session.getAttribute("loginMember");
         model.addAttribute("itemCategoryList", new ItemCategoryVO());
-        return "item/itemCategoryAdd";
+        return "itemCategory/itemCategoryAdd";
     }
 
     @PostMapping("/categoryAdd")
@@ -52,6 +53,30 @@ public class ItemCategoryController {
         itemCategoryService.deleteItemCategory(ctgr_cd);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/categoryUpdate")
+    public String categoryUpdate(@RequestParam("ctgrCd") String ctgrCd, Model model, HttpSession session){
+        MemberVO member = (MemberVO) session.getAttribute("loginMember");
+        ItemCategoryVO itemCategory = itemCategoryService.getItemCategoryByctgrCd(ctgrCd);
+        model.addAttribute("itemCategory", itemCategory);
+        log.info("*######*itemCategory {}", itemCategory);
+        return "itemCategory/modifyCategory";
+    }
+
+    @PostMapping("/categoryUpdate")
+    public String categoryUpdatePro(@ModelAttribute ItemCategoryVO itemCategory, HttpSession session, Model model) {
+        MemberVO member = (MemberVO) session.getAttribute("loginMember");
+        Map<String, Object> Map = new HashMap<>();
+        Map.put("itemCategory", itemCategory);
+        Map.put("cpn_id", member.getCpn_id());
+
+        itemCategoryService.itemCategoryUpdate(Map);
+        return "redirect:/categorySearch";
+    }
+
+
+
+
 
 
 
