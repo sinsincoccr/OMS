@@ -17,7 +17,7 @@ public interface ItemCategoryMapper {
 
     ItemCategoryVO getItemCategoryByctgrCd(String ctgr_cd);
 
-    List<ItemListVO> getItemListOne(String ctgr_cd);
+
 
     void itemCategoryAdd(ItemCategoryVO itemCategory, MemberVO member);
 

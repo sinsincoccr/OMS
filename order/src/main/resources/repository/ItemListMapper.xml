@@ -35,20 +35,35 @@
         )
     </insert>
 
+    <select id="getItemListOne" resultType="ItemListVO">
+        select * from OMS_ITEM_LIST where ctgr_cd = #{ctgr_cd}
+    </select>
+
+    <select id="getItemByProduct_cd" resultType="ItemListVO">
+        select * from OMS_ITEM_LIST where product_cd = #{product_cd}
+    </select>
+
+    <update id="itemListUpdate" parameterType="map">
+        UPDATE OMS_ITEM_LIST
+        SET
+        CTGR_CD = #{itemList.ctgr_cd, jdbcType=VARCHAR},
+        PRODUCT_NM = #{itemList.product_nm, jdbcType=VARCHAR},
+        SEQ = #{itemList.seq, jdbcType=INTEGER},
+        NORMAL_AMOUNT = #{itemList.normal_amount, jdbcType=INTEGER},
+        DISCOUNT_AMOUNT = #{itemList.discount_amount, jdbcType=INTEGER},
+        RANKING = #{itemList.ranking, jdbcType=INTEGER},
+        PRODUCT_STATE = #{itemList.product_state, jdbcType=VARCHAR},
+        PRODUCT_GUIDE = #{itemList.product_guide, jdbcType=VARCHAR},
+        MDF_USER_CD = #{mdf_user_cd, jdbcType=VARCHAR},
+        MDF_DATE = sysdate
+        WHERE
+        PRODUCT_CD = #{itemList.product_cd, jdbcType=VARCHAR}
+    </update>
 
 
 
-    <!--
-        <update id="itemCategoryUpdate" parameterType="ItemCategoryVO">
-            UPDATE OMS_ITEM_CATEGORY
-            SET
-            CPN_NM = #{cpn_nm, jdbcType=VARCHAR},
-            SEQ = #{seq, jdbcType=INTEGER},
-            MDF_USER_CD = #{member.CPN_ID, jdbcType=VARCHAR},
-            MDF_DATE= sysdate
-            WHERE
-            CTGR_CD = #{ctgr_cd, jdbcType=VARCHAR}
-        </update> -->
+
+
 
 
 

@@ -13,7 +13,9 @@ import projectOMS.order.domain.MemberVO;
 import projectOMS.order.service.ItemCategoryService;
 import projectOMS.order.service.ItemListService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -39,7 +41,7 @@ public class ItemListController {
     @GetMapping("/getItemListOne")
     @ResponseBody
     public List<ItemListVO> getItemListOne(@RequestParam("ctgr_cd") String ctgrCd) {
-        return itemCategoryService.getItemListOne(ctgrCd);
+        return itemListService.getItemListOne(ctgrCd);
     }
 
     @GetMapping("/itemAdd")
@@ -55,6 +57,27 @@ public class ItemListController {
         itemListService.itemListAdd(itemList, member);
         return "item/itemSearch";
     }
+
+    @GetMapping("/itemListUpdate")
+    public String itemListUpdate(@RequestParam("product_cd") String product_cd, Model model, HttpSession session){
+        MemberVO member = (MemberVO) session.getAttribute("loginMember");
+        ItemListVO itemList = itemListService.getItemByProduct_cd(product_cd);
+        model.addAttribute("itemList", itemList);
+        return "item/itemListUpdate";
+    }
+
+    @PostMapping("/itemListUpdate")
+    public String itemListUpdatePro(@ModelAttribute ItemListVO itemList, HttpSession session, Model model) {
+        MemberVO member = (MemberVO) session.getAttribute("loginMember");
+        Map<String, Object> Map = new HashMap<>();
+        Map.put("itemList", itemList);
+        Map.put("cpn_id", member.getCpn_id());
+
+        itemListService.itemListUpdate(Map);
+        return "redirect:/itemSearch";
+    }
+
+
 
 
 

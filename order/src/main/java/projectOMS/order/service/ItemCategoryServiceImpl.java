@@ -32,11 +32,6 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
         return itemCategoryMapper.getItemCategoryByctgrCd(ctgr_cd);
     }
 
-    @Override
-    public List<ItemListVO> getItemListOne(String ctgr_cd) {
-        List<ItemListVO> getItemListOne = itemCategoryMapper.getItemListOne(ctgr_cd);
-        return getItemListOne;
-    }
 
     @Override
     public void itemCategoryAdd(ItemCategoryVO itemCategory, MemberVO member) {

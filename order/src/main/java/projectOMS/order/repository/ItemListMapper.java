@@ -15,6 +15,12 @@ public interface ItemListMapper {
 
     void itemListAdd(ItemListVO itemList, MemberVO member);
 
+    List<ItemListVO> getItemListOne(String ctgr_cd);
+
+    ItemListVO getItemByProduct_cd(String product_cd);
+
+    void itemListUpdate(Map<String, Object> Map);
+
 
 
 

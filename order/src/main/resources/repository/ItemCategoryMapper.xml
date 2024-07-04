@@ -14,9 +14,7 @@
         select * from OMS_ITEM_CATEGORY where ctgr_cd = #{ctgr_cd}
     </select>
 
-    <select id="getItemListOne" resultType="ItemListVO">
-        select * from OMS_ITEM_LIST where ctgr_cd = #{ctgr_cd}
-    </select>
+
 
     <insert id="itemCategoryAdd" parameterType="map">
         INSERT INTO OMS_ITEM_CATEGORY (
@@ -46,18 +44,6 @@
         CTGR_CD = #{itemCategory.ctgr_cd, jdbcType=VARCHAR}
     </update>
 
-
-    <!--
-        <update id="itemCategoryUpdate" parameterType="ItemCategoryVO">
-            UPDATE OMS_ITEM_CATEGORY
-            SET
-            CPN_NM = #{cpn_nm, jdbcType=VARCHAR},
-            SEQ = #{seq, jdbcType=INTEGER},
-            MDF_USER_CD = #{member.CPN_ID, jdbcType=VARCHAR},
-            MDF_DATE= sysdate
-            WHERE
-            CTGR_CD = #{ctgr_cd, jdbcType=VARCHAR}
-        </update> -->
 
 
 
