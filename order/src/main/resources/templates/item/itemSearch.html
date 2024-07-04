@@ -45,7 +45,7 @@
                     </option>
                 </select>
                 <button type="button" class='btn_search'>조회</button>
-                <button type="button" class="btn btn-secondary" onclick="registerItem()">등록</button>
+                <button type="button" class="btn btn-secondary" onclick="addItem()">등록</button>
             </div>
             <input type='text' id='scd' name='scd' hidden value="UserLevelBasedValue" />
         </div>
@@ -126,7 +126,7 @@
 
 
 <script>
-    function registerItem() {
+    function addItem() {
         const selectedCategory = document.getElementById('snm').value;
         if (selectedCategory) {
             location.href = `/itemAdd?ctgrCd=${selectedCategory}`;

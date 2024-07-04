@@ -13,7 +13,7 @@
 <th:block th:insert="~{assist/sidebar :: contents}"/>
 <div style="margin-left:200px; padding:20px;">
 
-    <form id="itemCategoryForm" th:action="@{/categoryAdd}" th:object="${itemCategoryList}" method="post" onsubmit="saveAndClose()">
+    <form id="itemCategoryForm" th:action="@{/categoryAdd}" th:object="${itemCategoryList}" method="post" >
         <div class="container">
 
             <div class="mb-3">
@@ -38,13 +38,7 @@
 
 </div>
 
-<script>
-    function saveAndClose() {
-        setTimeout(function() {
-            window.close();
-        }, 1000); // 1초 후 창을 닫음
-    }
-</script>
+
 
 </body>
 </html>

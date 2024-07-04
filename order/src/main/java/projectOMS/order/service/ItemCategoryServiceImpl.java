@@ -14,14 +14,12 @@ import java.util.Map;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ItemCategoryServiceImpl implements ItemCategoryService {
 
 
     private final ItemCategoryMapper itemCategoryMapper;
 
-    public ItemCategoryServiceImpl(ItemCategoryMapper itemCategoryMapper) {
-        this.itemCategoryMapper = itemCategoryMapper;
-    }
 
     @Override
     public List<ItemCategoryVO> getItemCategory(String cpn_nm) {

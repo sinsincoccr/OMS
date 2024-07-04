@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="projectOMS.order.repository.ItemListMapper">
+
+
+    <insert id="itemListAdd" parameterType="map">
+        INSERT INTO OMS_ITEM_LIST (
+        CTGR_CD,
+        PRODUCT_CD,
+        PRODUCT_NM,
+        SEQ,
+        NORMAL_AMOUNT,
+        DISCOUNT_AMOUNT,
+        RANKING,
+        PRODUCT_STATE,
+        PRODUCT_GUIDE,
+        REG_USER_CD,
+        REG_DATE
+        )
+        VALUES (
+        #{itemList.ctgr_cd, jdbcType=VARCHAR},
+        #{itemList.product_cd, jdbcType=VARCHAR},
+        #{itemList.product_nm, jdbcType=VARCHAR},
+        #{itemList.seq, jdbcType=INTEGER},
+        #{itemList.normal_amount, jdbcType=INTEGER},
+        #{itemList.discount_amount, jdbcType=INTEGER},
+        #{itemList.ranking, jdbcType=INTEGER},
+        #{itemList.product_state, jdbcType=VARCHAR},
+        #{itemList.product_guide, jdbcType=VARCHAR},
+        #{member.cpn_id, jdbcType=VARCHAR},
+        sysdate
+        )
+    </insert>
+
+
+
+
+    <!--
+        <update id="itemCategoryUpdate" parameterType="ItemCategoryVO">
+            UPDATE OMS_ITEM_CATEGORY
+            SET
+            CPN_NM = #{cpn_nm, jdbcType=VARCHAR},
+            SEQ = #{seq, jdbcType=INTEGER},
+            MDF_USER_CD = #{member.CPN_ID, jdbcType=VARCHAR},
+            MDF_DATE= sysdate
+            WHERE
+            CTGR_CD = #{ctgr_cd, jdbcType=VARCHAR}
+        </update> -->
+
+
+
+
+</mapper>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Item Category</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+</head>
+
+<body>
+
+<th:block th:insert="~{assist/sidebar :: contents}"/>
+<div style="margin-left:200px; padding:20px;">
+
+    <form id="itemListForm" th:action="@{/itemAdd}" th:object="${itemList}" method="post" >
+        <div class="container">
+
+            <div class="mb-3">
+                <label for="ctgrCdInput" class="form-label">카테고리</label>
+                <input th:field="*{ctgr_cd}" class="form-control" id="ctgrCdInput" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="productCdInput" class="form-label">제품넘버</label>
+                <input th:field="*{product_cd}" class="form-control" id="productCdInput" />
+            </div>
+
+            <div class="mb-3">
+                <label for="productNmInput" class="form-label">제품명</label>
+                <input th:field="*{product_nm}" class="form-control" id="productNmInput" />
+            </div>
+
+            <div class="mb-3">
+                <label for="seqInput" class="form-label">정렬</label>
+                <input th:field="*{seq}" class="form-control" id="seqInput" />
+            </div>
+
+            <div class="mb-3">
+                <label for="normalAmountInput" class="form-label">판매금액</label>
+                <input th:field="*{normal_amount}" class="form-control" id="normalAmountInput" />
+            </div>
+
+            <div class="mb-3">
+                <label for="discountAmountInput" class="form-label">할인금액</label>
+                <input th:field="*{discount_amount}" class="form-control" id="discountAmountInput" />
+            </div>
+
+            <div class="mb-3">
+                <label for="rankingInput" class="form-label">판매량</label>
+                <input th:field="*{ranking}" class="form-control" id="rankingInput" />
+            </div>
+
+            <div class="mb-3">
+                <label for="productStateInput" class="form-label">등록현황</label>
+                <input th:field="*{product_state}" class="form-control" id="productStateInput" />
+            </div>
+
+            <div class="mb-3">
+                <label for="productGuideInput" class="form-label">제품설명</label>
+                <input th:field="*{product_guide}" class="form-control" id="productGuideInput" />
+            </div>
+
+
+
+
+            <button type="submit" class="btn btn-primary">저장</button>
+            <button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/}'|">취소</button>
+        </div>
+    </form>
+
+
+</div>
+
+
+</body>
+</html>
