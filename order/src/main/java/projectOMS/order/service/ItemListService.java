@@ -17,6 +17,8 @@ public interface ItemListService {
 
     void itemListUpdate(Map<String, Object> Map);
 
+    void deleteItem(String product_cd);
+
 
 
 

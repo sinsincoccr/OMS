@@ -60,6 +60,10 @@
         PRODUCT_CD = #{itemList.product_cd, jdbcType=VARCHAR}
     </update>
 
+    <delete id="deleteItem" parameterType="String">
+        DELETE FROM OMS_ITEM_LIST WHERE product_cd = #{product_cd}
+    </delete>
+
 
 
 

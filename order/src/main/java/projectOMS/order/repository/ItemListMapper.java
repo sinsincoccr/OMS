@@ -21,6 +21,8 @@ public interface ItemListMapper {
 
     void itemListUpdate(Map<String, Object> Map);
 
+    void deleteItem(String product_cd);
+
 
 
 

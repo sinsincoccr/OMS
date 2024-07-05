@@ -45,5 +45,10 @@ public class ItemListServiceImpl implements ItemListService {
 
     }
 
+    @Override
+    public void deleteItem(String product_cd) {
+        itemListMapper.deleteItem(product_cd);
+    }
+
 
 }

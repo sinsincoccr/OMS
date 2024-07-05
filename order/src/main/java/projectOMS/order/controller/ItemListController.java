@@ -77,6 +77,12 @@ public class ItemListController {
         return "redirect:/itemSearch";
     }
 
+    @DeleteMapping("/itemDelete/{product_cd}")
+    public ResponseEntity<Void> itemDelete(@PathVariable("product_cd") String product_cd) {
+       itemListService.deleteItem(product_cd);
+        return ResponseEntity.ok().build();
+    }
+
 
 
 

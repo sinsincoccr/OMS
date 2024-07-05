@@ -93,7 +93,7 @@
                             var regDate = new Date(item.reg_date).toISOString().split('T')[0];
                             var mdfDate = new Date(item.mdf_date).toISOString().split('T')[0];
 
-                            var row = '<tr data-ctgr_cd="' + item.ctgr_cd + '">' +
+                            var row = '<tr data-product_cd="' + item.product_cd + '">' +
                                 '<td>' + item.ctgr_cd + '</td>' +
                                 '<td>' + item.product_cd + '</td>' +
                                 '<td>' + item.product_nm + '</td>' +
@@ -111,7 +111,7 @@
                                 '<button type="button" class="btn btn-secondary" onclick="updateItem(\'' + item.product_cd + '\')">수정</button>' +
                                 '</td>' +
                                 '<td>' +
-                                '<button type="button" class="btn btn-danger" onclick="deleteItem(\'' + item.ctgr_cd + '\')">삭제</button>' +
+                                '<button type="button" class="btn btn-danger" onclick="deleteItem(\'' + item.product_cd + '\')">삭제</button>' +
                                 '</td>' +
                                 '</tr>';
                             $('#itemTable tbody').append(row);
@@ -140,16 +140,15 @@
         location.href = '/itemListUpdate?product_cd=' + product_cd;
     }
 
-    function deleteItem(ctgrCd) {
+    function deleteItem(product_cd) {
         if (confirm('정말 삭제하시겠습니까?')) {
             $.ajax({
-                type: 'POST',
-                url: '/deleteItem',  // 삭제할 엔드포인트 URL
-                data: { ctgr_cd: ctgrCd },  // 파라미터로 삭제할 카테고리 코드 전송
+                type: 'DELETE',
+                url: '/itemDelete/' + product_cd,  // 삭제할 엔드포인트 URL
                 success: function () {
                     alert('삭제되었습니다.');
                     // 삭제된 항목을 브라우저에서 제거합니다.
-                    $('tr[data-ctgr_cd="' + ctgrCd + '"]').remove();
+                    $('tr[data-product_cd="' + product_cd + '"]').remove();
                 },
                 error: function () {
                     alert('삭제 중 오류가 발생했습니다.');
