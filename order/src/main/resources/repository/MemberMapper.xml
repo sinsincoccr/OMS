@@ -49,6 +49,22 @@
         select * from OMS_COMPANY_MEMBER where cpn_no=#{cpn_no}
     </select>
 
+    <update id="memberUpdate" parameterType="map">
+        UPDATE OMS_COMPANY_MEMBER
+        SET
+        CPN_PW = #{member.cpn_pw, jdbcType=VARCHAR},
+        CPN_NM = #{member.cpn_nm, jdbcType=VARCHAR},
+        CEO_NM = #{member.ceo_nm, jdbcType=VARCHAR},
+        CPN_ADDR = #{member.cpn_addr, jdbcType=VARCHAR},
+        CPN_DESC = #{member.cpn_desc, jdbcType=VARCHAR},
+        CPN_TEL = #{member.cpn_tel, jdbcType=VARCHAR},
+        CPN_EMAIL = #{member.cpn_email, jdbcType=VARCHAR},
+        REG_DATE = sysdate
+        WHERE CPN_ID = #{cpn_id, jdbcType=VARCHAR}
+    </update>
+
+
+
 
 
 

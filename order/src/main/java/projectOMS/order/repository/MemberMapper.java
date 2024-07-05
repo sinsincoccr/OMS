@@ -4,8 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import projectOMS.order.domain.MemberVO;
 
 
-import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 @Mapper
 public interface MemberMapper {
@@ -15,9 +14,7 @@ public interface MemberMapper {
 
     MemberVO findById(String cpn_id);
 
-    Optional<MemberVO> findByPw(String pw);
-
-    List<MemberVO> findAll();
+    void memberUpdate(Map<String, Object> Map);
 
 
 

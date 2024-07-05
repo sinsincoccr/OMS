@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Member LogIn</title>
+
+    <style>
+        .id_ok{
+            color:#008000;
+            display: none;
+        }
+        .id_already{
+            color:#6A82FB;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+
+<form th:action="@{/mypageUpdate}" th:object="${member}" method="get">
+    <div class="container">
+        <div class="mb-3">
+            <label for="id">아이디</label>
+            <span id="id" th:text="*{cpn_id}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="pwInput" class="form-label">비밀번호</label>
+            <span class="form-control" id="pwInput" th:text="*{cpn_pw}"></span>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary">수정</button>
+    </div>
+</form>
+
+
+
+
+
+
+</body>
+</html>

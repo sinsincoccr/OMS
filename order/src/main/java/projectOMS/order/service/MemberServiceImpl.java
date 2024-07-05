@@ -9,6 +9,8 @@ import projectOMS.order.domain.MemberVO;
 import projectOMS.order.repository.MemberMapper;
 import projectOMS.order.repository.MemberRepository;
 
+import java.util.Map;
+
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +32,12 @@ public class MemberServiceImpl implements MemberService{
         int cnt = memberMapper.idCheck(id);
         System.out.println("cnt: " + cnt);
         return cnt;
+    }
+
+    @Override
+    public void memberUpdate(Map<String, Object> Map) {
+        memberMapper.memberUpdate(Map);
+
     }
 
 
