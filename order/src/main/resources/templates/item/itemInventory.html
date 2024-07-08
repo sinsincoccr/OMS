@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품관리 - 플랫폼사별 카테고리 조회</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            z-index: 1000;
+            width: calc(100% - 22px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .dropdown-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+<th:block th:insert="~{assist/sidebar :: contents}"/>
+<div style="margin-left:200px; padding:20px;">
+    <div class="page_div">
+        <header>
+            <div id="header_title">상품관리<b class="greater">&gt;</b>아이템 리스트 조회</div>
+        </header>
+        <section class='div_header'>
+            <div class='search_div'>
+                <div class="search_form" id="snm_form">
+                    <select class='search_box' id='snm' name='snm'>
+                        <option value="" disabled selected>카테고리를 선택하세요</option>
+                        <option th:each="category : ${categorySearch}"
+                                th:value="${category.ctgr_cd}"
+                                th:text="${category.ctgr_cd + ' - ' + category.reg_user_cd}">
+                        </option>
+                    </select>
+                    <button type="button" class='btn_search'>조회</button>
+                </div>
+                <input type='text' id='scd' name='scd' hidden value="UserLevelBasedValue" />
+            </div>
+        </section>
+        <div class='main_div'>
+            <table id="itemTable" border="1">
+                <thead>
+                <tr>
+                    <th>카테고리</th>
+                    <th>제품넘버</th>
+                    <th>제품명</th>
+                    <th>정렬</th>
+                    <th>판매금액</th>
+                    <th>할인금액</th>
+                    <th>판매량</th>
+                    <th>등록현황</th>
+                    <th>제품설명</th>
+                    <th>등록자</th>
+                    <th>등록일</th>
+                    <th>수정자</th>
+                    <th>수정일시</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 데이터가 여기에 동적으로 추가됩니다 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+        $('.btn_search').click(function () {
+            var ctgr_cd = $('#snm').val();  // 선택된 카테고리 코드
+            if (ctgr_cd) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/getItemListOne',  // 서버에서 데이터를 받아올 엔드포인트
+                    data: { ctgr_cd: ctgr_cd },  // 파라미터로 카테고리 코드 전송
+                    success: function (data) {
+                        // 테이블의 tbody를 비우고 서버에서 받은 데이터로 채웁니다.
+                        $('#itemTable tbody').empty();
+                        $.each(data, function (index, item) {
+                            var regDate = new Date(item.reg_date).toISOString().split('T')[0];
+                            var mdfDate = new Date(item.mdf_date).toISOString().split('T')[0];
+
+                            var row = '<tr data-product_cd="' + item.product_cd + '">' +
+                                '<td>' + item.ctgr_cd + '</td>' +
+                                '<td>' + item.product_cd + '</td>' +
+                                '<td>' + item.product_nm + '</td>' +
+                                '<td>' + item.seq + '</td>' +
+                                '<td>' + item.normal_amount + '</td>' +
+                                '<td>' + item.discount_amount + '</td>' +
+                                '<td>' + item.ranking + '</td>' +
+                                '<td>' + item.product_state + '</td>' +
+                                '<td>' + item.product_guide + '</td>' +
+                                '<td>' + item.reg_user_cd + '</td>' +
+                                '<td>' + regDate + '</td>' +
+                                '<td>' + item.mdf_user_cd + '</td>' +
+                                '<td>' + mdfDate + '</td>' +
+
+                                '</tr>';
+                            $('#itemTable tbody').append(row);
+                        });
+                    },
+                    error: function () {
+                        alert('데이터를 불러오는 중 오류가 발생했습니다.');
+                    }
+                });
+            } else {
+                alert('카테고리를 선택하세요.');
+            }
+        });
+    });
+
+    function addItem() {
+        const selectedCategory = document.getElementById('snm').value;
+        if (selectedCategory) {
+            location.href = `/itemAdd?ctgrCd=${selectedCategory}`;
+        } else {
+            alert('카테고리를 선택하세요');
+        }
+    }
+
+    function updateItem(product_cd) {
+        location.href = '/itemListUpdate?product_cd=' + product_cd;
+    }
+
+    function deleteItem(product_cd) {
+        if (confirm('정말 삭제하시겠습니까?')) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/itemDelete/' + product_cd,  // 삭제할 엔드포인트 URL
+                success: function () {
+                    alert('삭제되었습니다.');
+                    // 삭제된 항목을 브라우저에서 제거합니다.
+                    $('tr[data-product_cd="' + product_cd + '"]').remove();
+                },
+                error: function () {
+                    alert('삭제 중 오류가 발생했습니다.');
+                }
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

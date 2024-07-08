@@ -19,11 +19,15 @@ CREATE TABLE OMS_COMPANY_MEMBER (
 );
 
 select * from OMS_COMPANY_MEMBER;
+commit;
+
+UPDATE oms_company_member set CPN_PW = '111' where cpn_pw is null;
+delete oms_company_member where CPN_CD = 'CPN001';
 
 INSERT INTO OMS_COMPANY_MEMBER (
     CPN_CD, CPN_BIZ_NO, CPN_ID, CPN_PW, CPN_NM, CEO_NM, CPN_ADDR, CPN_IMAGE_URL, CPN_DESC, OPN_DT, CPN_TEL, CPN_EMAIL, CPN_STATE, STATE_MDF_DATE, REG_DATE
 ) VALUES (
-    'CPN002', '123-45-67899', '222', '222', 'Company B', 'CEO Name', '123 Main St, City', 'http://example.com/image.png', 'Description here', '20200101', '010-1234-5678', 'contact@company.com', 'Active', TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2023-01-01', 'YYYY-MM-DD')
+    'CPN001', '123-45-67899', '111', '111', 'Company A', 'CEO Name', '123 Main St, City', 'http://example.com/image.png', 'Description here', '20200101', '010-1234-5678', 'contact@company.com', 'Active', TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2023-01-01', 'YYYY-MM-DD')
 );
 
 UPDATE OMS_COMPANY_MEMBER SET CPN_ID = '111' WHERE CPN_ID = 'Company A';

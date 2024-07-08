@@ -83,6 +83,15 @@ public class ItemListController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/itemInventory")
+    public String itemInventory(Model model, HttpSession session) {
+        MemberVO member = (MemberVO) session.getAttribute("loginMember");
+        List<ItemCategoryVO> categorySearch = itemCategoryService.getItemCategory(String.valueOf(member.getCpn_nm()));
+        model.addAttribute("categorySearch", categorySearch);
+        log.info("****categorySearch {}", categorySearch);
+        return "item/itemInventory";
+    }
+
 
 
 

@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-
+<th:block th:insert="~{assist/sidebar :: contents}"/>
 
 <form th:action="@{/mypageUpdate}" th:object="${member}" method="get">
     <div class="container">
