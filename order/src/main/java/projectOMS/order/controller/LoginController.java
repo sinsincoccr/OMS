@@ -15,6 +15,9 @@ import projectOMS.order.domain.MemberVO;
 import projectOMS.order.service.LoginService;
 import projectOMS.order.service.MemberService;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 @Slf4j
@@ -23,6 +26,7 @@ import projectOMS.order.service.MemberService;
 public class LoginController {
     private final MemberService memberService;
     private final LoginService loginService;
+    private static final String SALT = "rainpassword";
 
     @RequestMapping("/")
     public String home(@ModelAttribute MemberVO member, HttpSession session, HttpServletRequest request, Model model) {
@@ -46,7 +50,8 @@ public class LoginController {
     @PostMapping("/memberLogin")
     public String memberLoginPro(@ModelAttribute MemberVO member, HttpSession session, Model model){
         log.info("member PostMapping : {}", member);
-
+        String hashedPassword = hashPassword(member.getCpn_pw() + SALT);
+        member.setCpn_pw(hashedPassword);
         // 로그인 로직 구현
         MemberVO loginMember = loginService.memberLogin(member);
         log.info("loginMember {}", loginMember);
@@ -64,10 +69,30 @@ public class LoginController {
 
 
 
+
+
     // 로그아웃 요청
     @GetMapping("logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
+    }
+
+
+
+    private String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] encodedHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : encodedHash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

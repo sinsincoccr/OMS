@@ -24,6 +24,7 @@ import java.util.Map;
 public class MemberController {
 
     private final MemberService memberService;
+    private static final String SALT = "rainpassword";
 
     @GetMapping("/memberSignIn")
     public String memberSignIn(Model model){
@@ -33,7 +34,7 @@ public class MemberController {
 
     @PostMapping("/memberSignIn")
     public String memberSignInPro(MemberVO member) {
-        String hashedPassword = hashPassword(member.getCpn_pw());
+        String hashedPassword = hashPassword(member.getCpn_pw() + SALT);
         member.setCpn_pw(hashedPassword);
         memberService.memberSignIn(member);
         return "redirect:/"; // 회원 상세 페이지로 이동
