@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품관리 - 플랫폼사별 카테고리 조회</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            z-index: 1000;
+            width: calc(100% - 22px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .dropdown-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+<th:block th:insert="~{assist/sidebar :: contents}"/>
+<div style="margin-left:200px; padding:20px;">
+    <div class="page_div">
+        <header>
+            <div id="header_title">상품관리<b class="greater">&gt;</b>아이템 리스트 조회</div>
+        </header>
+        <section class='div_header'>
+            <div class='search_div'>
+                <div class="search_form" id="snm_form">
+                    <select class='search_box' id='snm' name='snm'>
+                        <option value="" disabled selected>카테고리를 선택하세요</option>
+                        <option th:each="orderForm : ${orderForm}"
+                                th:value="${orderForm.order_id}"
+                                th:text="${orderForm.order_id + ' - ' + orderForm.cpn_cd}">
+                        </option>
+                    </select>
+                    <button type="button" class='btn_search'>조회</button>
+                </div>
+                <input type='text' id='scd' name='scd' hidden value="UserLevelBasedValue" />
+            </div>
+        </section>
+        <div class='main_div'>
+            <table id="itemTable" border="1">
+                <thead>
+                <tr>
+                    <th>주문 ID</th>
+                    <th>쿠폰 코드</th>
+                    <th>결제 유형</th>
+                    <th>총 금액</th>
+                    <th>총 부가세</th>
+                    <th>배송비</th>
+                    <th>주문 주소</th>
+                    <th>등록 일시</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 데이터가 여기에 동적으로 추가됩니다 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+        $('.btn_search').click(function () {
+            var orderId = $('#snm').val();  // 선택된 주문 ID
+            if (orderId) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/getItemListOne',  // 서버에서 데이터를 받아올 엔드포인트
+                    data: { orderId: orderId },  // 파라미터로 주문 ID 전송
+                    success: function (data) {
+                        // 테이블의 tbody를 비우고 서버에서 받은 데이터로 채웁니다.
+                        $('#itemTable tbody').empty();
+                        $.each(data, function (index, item) {
+                            var regDate = new Date(item.regDate).toISOString().split('T')[0];
+
+                            var row = '<tr data-order-id="' + item.orderId + '">' +
+                                '<td>' + item.orderId + '</td>' +
+                                '<td>' + item.cpnCd + '</td>' +
+                                '<td>' + item.payType + '</td>' +
+                                '<td>' + item.totAmt + '</td>' +
+                                '<td>' + item.totVat + '</td>' +
+                                '<td>' + item.deliverFee + '</td>' +
+                                '<td>' + item.ordAddr + '</td>' +
+                                '<td>' + regDate + '</td>' +
+                                '</tr>';
+                            $('#itemTable tbody').append(row);
+                        });
+                    },
+                    error: function () {
+                        alert('데이터를 불러오는 중 오류가 발생했습니다.');
+                    }
+                });
+            } else {
+                alert('카테고리를 선택하세요.');
+            }
+        });
+    });
+
+    function addItem() {
+        const selectedOrder = document.getElementById('snm').value;
+        if (selectedOrder) {
+            location.href = `/itemAdd?orderId=${selectedOrder}`;
+        } else {
+            alert('주문 ID를 선택하세요');
+        }
+    }
+
+    function updateItem(orderId) {
+        location.href = '/itemListUpdate?orderId=' + orderId;
+    }
+
+    function deleteItem(orderId) {
+        if (confirm('정말 삭제하시겠습니까?')) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/itemDelete/' + orderId,  // 삭제할 엔드포인트 URL
+                success: function () {
+                    alert('삭제되었습니다.');
+                    // 삭제된 항목을 브라우저에서 제거합니다.
+                    $('tr[data-order-id="' + orderId + '"]').remove();
+                },
+                error: function () {
+                    alert('삭제 중 오류가 발생했습니다.');
+                }
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
