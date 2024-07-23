@@ -15,4 +15,4 @@ jquery - ajax
 
  - 추후 작업 내용
 
-   Webshop 프로젝트와 연동
+   Webshop 프로젝트와 연동 및 typeScript 추가
